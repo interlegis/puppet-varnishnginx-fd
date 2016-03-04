@@ -49,13 +49,14 @@ define varnishnginxfd::vhost ( $dn,
     }
 
     nginx::resource::vhost { $url:
-      proxy        => 'http://localhost:80',
-      ssl          => true,
-      listen_port  => 443,
-      ssl_port     => 443,
-      ssl_cert     => "/etc/ssl/certs/$nome.crt",
-      ssl_key      => "/etc/ssl/private/$nome.key",
-      ssl_stapling => true,
+      proxy              => 'http://localhost:80',
+      ssl                => true,
+      listen_port        => 443,
+      ssl_port           => 443,
+      ssl_cert           => "/etc/ssl/certs/$nome.crt",
+      ssl_key            => "/etc/ssl/private/$nome.key",
+      ssl_stapling       => true,
+      proxy_read_timeout => 900,
     }
 
     varnish::selector { "redirectssl_$nome":
